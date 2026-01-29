@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 const FormInsulin = () => {
-  const [insulinValue, setInsulinValue] = useState<string>("");
-  const [insulinType, setInsulinType] = useState<string>("");
-  const [insulinTime, setInsulinTime] = useState<string>(() => {
+  const calculateCurrentTime = () => {
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     return now.toISOString().slice(0, 16);
-  });
+  };
+
+  const [insulinValue, setInsulinValue] = useState<string>("");
+  const [insulinType, setInsulinType] = useState<string>("none");
+  const [insulinTime, setInsulinTime] = useState<string>(calculateCurrentTime);
   const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -15,8 +17,8 @@ const FormInsulin = () => {
   const errorSequence = (errorMsg: string) => {
     setError(errorMsg);
     setInsulinValue("");
-    setInsulinType("");
-    setInsulinTime("");
+    setInsulinType("none");
+    setInsulinTime(calculateCurrentTime);
     setFieldsDisabled(true);
     setTimeout(() => {
       setError("");
@@ -26,8 +28,8 @@ const FormInsulin = () => {
 
   const successSequence = () => {
     setInsulinValue("");
-    setInsulinType("");
-    setInsulinTime("");
+    setInsulinType("none");
+    setInsulinTime(calculateCurrentTime);
     setSuccess("Saved!");
     setFieldsDisabled(true);
     setTimeout(() => {
@@ -63,7 +65,11 @@ const FormInsulin = () => {
           disabled={fieldsDisabled}
         ></input>
       </div>
-      <select className="border rounded w-full p-2 text-sm" defaultValue="none">
+      <select
+        className="border rounded w-full p-2 text-sm"
+        value={insulinType}
+        onChange={(e) => setInsulinType(e.target.value)}
+      >
         <option value="none" disabled>
           Select Insulin Type
         </option>

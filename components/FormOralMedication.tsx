@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 const FormOralMedication = () => {
-  const [medicationValue, setMedicationValue] = useState<string>("");
-  const [medicationType, setMedicationType] = useState<string>("");
-  const [medicationTime, setMedicationTime] = useState<string>(() => {
+  const calculateCurrentTime = () => {
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     return now.toISOString().slice(0, 16);
-  });
+  };
+  const [medicationValue, setMedicationValue] = useState<string>("");
+  const [medicationType, setMedicationType] = useState<string>("none");
+  const [medicationTime, setMedicationTime] =
+    useState<string>(calculateCurrentTime);
   const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -15,8 +17,8 @@ const FormOralMedication = () => {
   const errorSequence = (errorMsg: string) => {
     setError(errorMsg);
     setMedicationValue("");
-    setMedicationType("");
-    setMedicationTime("");
+    setMedicationType("none");
+    setMedicationTime(calculateCurrentTime);
     setFieldsDisabled(true);
     setTimeout(() => {
       setError("");
@@ -26,8 +28,8 @@ const FormOralMedication = () => {
 
   const successSequence = () => {
     setMedicationValue("");
-    setMedicationType("");
-    setMedicationTime("");
+    setMedicationType("none");
+    setMedicationTime(calculateCurrentTime);
     setSuccess("Saved!");
     setFieldsDisabled(true);
     setTimeout(() => {
@@ -63,7 +65,11 @@ const FormOralMedication = () => {
           disabled={fieldsDisabled}
         ></input>
       </div>
-      <select className="border rounded w-full p-2 text-sm" defaultValue="none">
+      <select
+        className="border rounded w-full p-2 text-sm"
+        value={medicationType}
+        onChange={(e) => setMedicationType(e.target.value)}
+      >
         <option value="none" disabled>
           Select Medication Type
         </option>

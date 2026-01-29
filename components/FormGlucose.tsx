@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
 const FormGlucose = () => {
-  const [glucoseValue, setGlucoseValue] = useState<string>("");
-  const [glucoseFlag, setGlucoseFlag] = useState<string>("");
-  const [glucoseTime, setGlucoseTime] = useState<string>(() => {
+  const calculateCurrentTime = () => {
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     return now.toISOString().slice(0, 16);
-  });
+  };
+
+  const [glucoseValue, setGlucoseValue] = useState<string>("");
+  const [glucoseFlag, setGlucoseFlag] = useState<string>("none");
+  const [glucoseTime, setGlucoseTime] = useState<string>(calculateCurrentTime);
   const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -15,7 +17,8 @@ const FormGlucose = () => {
   const errorSequence = (errorMsg: string) => {
     setError(errorMsg);
     setGlucoseValue("");
-    setGlucoseFlag("");
+    setGlucoseFlag("none");
+    setGlucoseTime(calculateCurrentTime);
     setFieldsDisabled(true);
     setTimeout(() => {
       setError("");
@@ -25,7 +28,8 @@ const FormGlucose = () => {
 
   const successSequence = () => {
     setGlucoseValue("");
-    setGlucoseFlag("");
+    setGlucoseFlag("none");
+    setGlucoseTime(calculateCurrentTime);
     setSuccess("Saved!");
     setFieldsDisabled(true);
     setTimeout(() => {
@@ -58,7 +62,11 @@ const FormGlucose = () => {
           disabled={fieldsDisabled}
         ></input>
       </div>
-      <select className="border rounded w-full p-2 text-sm" defaultValue="none">
+      <select
+        className="border rounded w-full p-2 text-sm"
+        value={glucoseFlag}
+        onChange={(e) => setGlucoseFlag(e.target.value)}
+      >
         <option value="none" disabled>
           Select Flag
         </option>
