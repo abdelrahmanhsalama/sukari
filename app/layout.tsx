@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased *:text-foreground *:border-foreground`}
       >
         <div className="bg-foreground h-dvh flex justify-center items-center font-sans">
-          <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-lg p-4 flex justify-center items-center bg-blue-200">
+          <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-2xl p-4 flex justify-center items-center bg-blue-200">
             {children}
           </div>
         </div>
