@@ -9,7 +9,7 @@ const FormMain = () => {
 
   return (
     <div className="flex-1 w-full bg-white rounded-lg p-4 flex flex-col items-center shadow-lg">
-      <div className="bg-zinc-100 flex p-1 gap-1 w-min rounded">
+      <div className="bg-blue-100 flex p-1 gap-1 w-min rounded">
         <div
           className={`p-1 rounded ${activeTab === "glucose" ? "bg-white shadow" : ""} cursor-pointer text-sm`}
           onClick={() => setActiveTab("glucose")}

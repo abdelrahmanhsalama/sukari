@@ -6,7 +6,7 @@ type EntryButtonTypes = {
 const EntryButton = ({ onSubmit, value }: EntryButtonTypes) => {
   return (
     <button
-      className="bg-black text-white p-2 rounded text-sm cursor-pointer disabled:bg-zinc-200"
+      className="bg-black text-white p-2 rounded text-sm cursor-pointer disabled:bg-gray-200"
       onClick={onSubmit}
       disabled={!value.trim()}
     >
