@@ -33,8 +33,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="bg-zinc-800 h-dvh flex justify-center items-center font-sans">
-          <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-lg p-4 flex justify-center items-center bg-zinc-200">
+        <div className="bg-zinc-900 h-dvh flex justify-center items-center font-sans">
+          <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-lg p-4 flex justify-center items-center bg-zinc-100">
             {children}
           </div>
         </div>
