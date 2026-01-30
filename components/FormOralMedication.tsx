@@ -1,13 +1,24 @@
 import { useFormManager } from "@/hooks/useFormManager";
 import { useState } from "react";
+import EntryInput from "./EntryInput";
+import EntrySelect from "./EntrySelect";
+import EntryTime from "./EntryTime";
+import EntryMessage from "./EntryMessage";
+import EntryButton from "./EntryButton";
+import EntrySubCard from "./EntrySubCard";
+
+const options = [
+  { id: "m-01", label: "🔵 Medication 01" },
+  { id: "m-02", label: "🟣 Medication 02" },
+];
 
 const FormOralMedication = () => {
   const {
     time,
     setTime,
     fieldsDisabled,
-    success,
-    error,
+    successMessage,
+    errorMessage,
     runSequence,
     valueInvalid,
   } = useFormManager();
@@ -35,50 +46,26 @@ const FormOralMedication = () => {
   };
 
   return (
-    <div className="w-full space-y-2 flex flex-col items-center">
-      <div className="relative w-full">
-        <p className="absolute top-1/2 -translate-y-1/2 right-2 text-sm">
-          pills
-        </p>
-        <input
-          type="number"
-          className="border rounded w-full p-2"
-          value={medicationValue || ""}
-          onChange={(e) => setMedicationValue(e.target.value)}
-          disabled={fieldsDisabled}
-        ></input>
-      </div>
-      <select
-        className="border rounded w-full p-2 text-sm"
-        value={medicationType}
-        onChange={(e) => setMedicationType(e.target.value)}
-      >
-        <option value="none" disabled>
-          Select Medication Type
-        </option>
-        <option value="m-01">🔵 Medication 01</option>
-        <option value="m-02">🟣 Medication 02</option>
-      </select>
-      <input
-        type="datetime-local"
-        className="border rounded w-full p-2 text-sm"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
+    <EntrySubCard>
+      <EntryInput
+        value={medicationValue}
+        setValue={setMedicationValue}
+        type="medication"
+        fieldsState={fieldsDisabled}
       />
-      {success ? (
-        <p className="text-green-500 text-center text-sm">{success}</p>
-      ) : null}
-      {error ? (
-        <p className="text-red-500 text-center text-sm">{error}</p>
-      ) : null}
-      <button
-        className="bg-black text-white p-2 rounded text-sm cursor-pointer disabled:bg-zinc-200"
-        onClick={handleSubmit}
-        disabled={!medicationValue.trim()}
-      >
-        Submit
-      </button>
-    </div>
+      <EntrySelect
+        value={medicationType}
+        setValue={setMedicationType}
+        type="medication"
+        options={options}
+      />
+      <EntryTime value={time} setValue={setTime} />
+      {successMessage && (
+        <EntryMessage message={successMessage} type="success" />
+      )}
+      {errorMessage && <EntryMessage message={errorMessage} type="error" />}
+      <EntryButton onSubmit={handleSubmit} value={medicationValue} />
+    </EntrySubCard>
   );
 };
 

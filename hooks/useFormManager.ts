@@ -9,12 +9,12 @@ export const useFormManager = () => {
 
   const [time, setTime] = useState<string>(calculateCurrentTime);
   const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
-  const [success, setSuccess] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const runSequence = (
     type: "success" | "error",
-    msg: string = "Saved!",
+    msg: string,
     setInputState: (emptyState: string) => void,
     setSelectState: (emptyState: string) => void,
   ) => {
@@ -24,26 +24,26 @@ export const useFormManager = () => {
     setTime(calculateCurrentTime);
 
     if (type === "success") {
-      setSuccess(msg);
-      setError("");
+      setSuccessMessage(msg);
+      setErrorMessage("");
     } else {
-      setError(msg);
-      setSuccess("");
+      setErrorMessage(msg);
+      setSuccessMessage("");
     }
   };
 
   useEffect(() => {
-    if (success || error) {
+    if (successMessage || errorMessage) {
       const timer = setTimeout(() => {
-        setSuccess("");
-        setError("");
+        setSuccessMessage("");
+        setErrorMessage("");
         setFieldsDisabled(false);
         setTime(calculateCurrentTime());
       }, 2000);
 
       return () => clearTimeout(timer);
     }
-  }, [success, error]);
+  }, [successMessage, errorMessage]);
 
   const valueInvalid = (value: string) => {
     if (Number(value) <= 0) {
@@ -56,8 +56,8 @@ export const useFormManager = () => {
     time,
     setTime,
     fieldsDisabled,
-    success,
-    error,
+    successMessage,
+    errorMessage,
     runSequence,
     valueInvalid,
   };
