@@ -28,7 +28,7 @@ export default function RootLayout({
         <link rel="icon" href="https://fav.farm/%E2%9D%A4%EF%B8%8F" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased *:text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased *:text-foreground *:border-foreground`}
       >
         <div className="bg-zinc-900 h-dvh flex justify-center items-center font-sans">
           <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-lg p-4 flex justify-center items-center bg-zinc-100">
