@@ -1,50 +1,32 @@
+import { useFormManager } from "@/hooks/useFormManager";
 import { useState } from "react";
 
 const FormGlucose = () => {
-  const calculateCurrentTime = () => {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    return now.toISOString().slice(0, 16);
-  };
+  const {
+    time,
+    setTime,
+    fieldsDisabled,
+    success,
+    error,
+    runSequence,
+    valueInvalid,
+  } = useFormManager();
 
   const [glucoseValue, setGlucoseValue] = useState<string>("");
   const [glucoseFlag, setGlucoseFlag] = useState<string>("none");
-  const [glucoseTime, setGlucoseTime] = useState<string>(calculateCurrentTime);
-  const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
-  const [success, setSuccess] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  const errorSequence = (errorMsg: string) => {
-    setError(errorMsg);
-    setGlucoseValue("");
-    setGlucoseFlag("none");
-    setGlucoseTime(calculateCurrentTime);
-    setFieldsDisabled(true);
-    setTimeout(() => {
-      setError("");
-      setFieldsDisabled(false);
-    }, 1000);
-  };
-
-  const successSequence = () => {
-    setGlucoseValue("");
-    setGlucoseFlag("none");
-    setGlucoseTime(calculateCurrentTime);
-    setSuccess("Saved!");
-    setFieldsDisabled(true);
-    setTimeout(() => {
-      setSuccess("");
-      setFieldsDisabled(false);
-    }, 1000);
-    console.log({ glucoseValue: glucoseValue, glucoseFlag: glucoseFlag });
-  };
 
   const handleSubmit = () => {
-    if (Number(glucoseValue) <= 0) {
-      errorSequence("Glucose reading can't be zero or in negative!");
+    if (valueInvalid(glucoseValue)) {
+      runSequence("error", "Invalid Value", setGlucoseValue, setGlucoseFlag);
       return;
+    } else {
+      runSequence("success", "Saved!", setGlucoseValue, setGlucoseFlag);
+      console.log({
+        glucoseValue: glucoseValue,
+        glucoseFlag: glucoseFlag,
+        glucoseTime: time,
+      });
     }
-    successSequence();
   };
 
   return (
@@ -82,8 +64,8 @@ const FormGlucose = () => {
       <input
         type="datetime-local"
         className="border rounded w-full p-2 text-sm"
-        value={glucoseTime}
-        onChange={(e) => setGlucoseTime(e.target.value)}
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
       />
       {success ? (
         <p className="text-green-500 text-center text-sm">{success}</p>

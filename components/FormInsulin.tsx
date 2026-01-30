@@ -1,54 +1,32 @@
+import { useFormManager } from "@/hooks/useFormManager";
 import { useState } from "react";
 
 const FormInsulin = () => {
-  const calculateCurrentTime = () => {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    return now.toISOString().slice(0, 16);
-  };
+  const {
+    time,
+    setTime,
+    fieldsDisabled,
+    success,
+    error,
+    runSequence,
+    valueInvalid,
+  } = useFormManager();
 
   const [insulinValue, setInsulinValue] = useState<string>("");
   const [insulinType, setInsulinType] = useState<string>("none");
-  const [insulinTime, setInsulinTime] = useState<string>(calculateCurrentTime);
-  const [fieldsDisabled, setFieldsDisabled] = useState<boolean>(false);
-  const [success, setSuccess] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  const errorSequence = (errorMsg: string) => {
-    setError(errorMsg);
-    setInsulinValue("");
-    setInsulinType("none");
-    setInsulinTime(calculateCurrentTime);
-    setFieldsDisabled(true);
-    setTimeout(() => {
-      setError("");
-      setFieldsDisabled(false);
-    }, 1000);
-  };
-
-  const successSequence = () => {
-    setInsulinValue("");
-    setInsulinType("none");
-    setInsulinTime(calculateCurrentTime);
-    setSuccess("Saved!");
-    setFieldsDisabled(true);
-    setTimeout(() => {
-      setSuccess("");
-      setFieldsDisabled(false);
-    }, 1000);
-    console.log({
-      insulinValue: insulinValue,
-      insulinType: insulinType,
-      insulinTime: insulinTime,
-    });
-  };
 
   const handleSubmit = () => {
-    if (Number(insulinValue) <= 0) {
-      errorSequence("Glucose reading can't be zero or in negative!");
+    if (valueInvalid(insulinValue)) {
+      runSequence("error", "Invalid Value", setInsulinValue, setInsulinType);
       return;
+    } else {
+      runSequence("success", "Saved!", setInsulinValue, setInsulinType);
+      console.log({
+        insulinValue: insulinValue,
+        insulinType: insulinType,
+        insulinTime: time,
+      });
     }
-    successSequence();
   };
 
   return (
@@ -79,8 +57,8 @@ const FormInsulin = () => {
       <input
         type="datetime-local"
         className="border rounded w-full p-2 text-sm"
-        value={insulinTime}
-        onChange={(e) => setInsulinTime(e.target.value)}
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
       />
       {success ? (
         <p className="text-green-500 text-center text-sm">{success}</p>
