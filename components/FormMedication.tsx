@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import FormInsulin from "./FormInsulin";
 import FormOralMedication from "./FormOralMedication";
 
 const FormMedication = () => {
   const [activeTab, setActiveTab] = useState("insulin");
-
-  useEffect(() => {
-    console.log(activeTab);
-  }, [activeTab]);
 
   return (
     <div className="w-full space-y-2">
