@@ -25,13 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="icon"
-          href="https://fav.farm/%F0%9F%A7%91%F0%9F%8F%BB%E2%80%8D%E2%9A%95%EF%B8%8F"
-        />
+        <link rel="icon" href="https://fav.farm/%E2%9D%A4%EF%B8%8F" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased *:text-foreground`}
       >
         <div className="bg-zinc-900 h-dvh flex justify-center items-center font-sans">
           <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-lg p-4 flex justify-center items-center bg-zinc-100">
