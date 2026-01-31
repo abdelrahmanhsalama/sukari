@@ -34,6 +34,7 @@ const EntrySelect = ({ value, setValue, type, options }: EntrySelectTypes) => {
         onChange={(e) => setValue(e.target.value)}
         sx={{ marginBottom: "10px" }}
       >
+        <MenuItem value="none">None</MenuItem>
         {options.map((option) => (
           <MenuItem value={option.id} key={option.id}>
             {option.label}
