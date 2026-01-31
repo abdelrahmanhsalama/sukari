@@ -24,7 +24,7 @@ const FormInsulin = () => {
   } = useFormManager();
 
   const [insulinValue, setInsulinValue] = useState<string>("");
-  const [insulinType, setInsulinType] = useState<string>("none");
+  const [insulinType, setInsulinType] = useState<string>("");
 
   const handleSubmit = () => {
     if (valueInvalid(insulinValue)) {

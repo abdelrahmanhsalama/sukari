@@ -20,7 +20,7 @@ export const useFormManager = () => {
   ) => {
     setFieldsDisabled(true);
     setInputState("");
-    setSelectState("none");
+    setSelectState("");
     setTime(calculateCurrentTime);
 
     if (type === "success") {

@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const roboto = Roboto({ variable: "--font-roboto", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Sukari",
@@ -28,7 +20,7 @@ export default function RootLayout({
         <link rel="icon" href="https://fav.farm/%E2%9D%A4%EF%B8%8F" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased *:text-foreground *:border-foreground`}
+        className={`${roboto.variable} antialiased *:text-foreground *:border-foreground`}
       >
         <div className="bg-foreground h-dvh flex justify-center items-center font-sans">
           <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-2xl p-4 flex justify-center items-center bg-blue-200">

@@ -1,3 +1,5 @@
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 type OptionType = {
   id: string;
   label: string;
@@ -12,24 +14,34 @@ type EntrySelectTypes = {
 
 const EntrySelect = ({ value, setValue, type, options }: EntrySelectTypes) => {
   return (
-    <select
-      className="border rounded w-full p-2 text-sm"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    >
-      <option value="none" disabled>
+    <FormControl fullWidth>
+      <InputLabel>
         {type === "glucose"
           ? "Select Flag"
           : type === "insulin"
             ? "Select Insulin Type"
             : "Select Medication Type"}
-      </option>
-      {options.map((option) => (
-        <option value={option.id} key={option.id}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+      </InputLabel>
+      <Select
+        size="small"
+        value={value}
+        label={
+          type === "glucose"
+            ? "Select Flag"
+            : type === "insulin"
+              ? "Select Insulin Type"
+              : "Select Medication Type"
+        }
+        onChange={(e) => setValue(e.target.value)}
+        sx={{ marginBottom: "10px" }}
+      >
+        {options.map((option) => (
+          <MenuItem value={option.id} key={option.id}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 

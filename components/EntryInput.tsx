@@ -1,3 +1,5 @@
+import { TextField } from "@mui/material";
+
 type EntryInputTypes = {
   value: string;
   setValue: (arg0: string) => void;
@@ -12,18 +14,21 @@ const EntryInput = ({
   fieldsState,
 }: EntryInputTypes) => {
   return (
-    <div className="relative w-full">
-      <p className="absolute top-1/2 -translate-y-1/2 right-2 text-sm">
-        {type === "glucose" ? "mg/dL" : type === "insulin" ? "units" : "pills"}
-      </p>
-      <input
-        type="number"
-        className="border rounded w-full p-2"
-        value={value || ""}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={fieldsState}
-      ></input>
-    </div>
+    <TextField
+      fullWidth
+      label={
+        type === "glucose"
+          ? "Glucose Reading in mg/dL"
+          : type === "insulin"
+            ? "Insulin Units"
+            : "Pills"
+      }
+      variant="outlined"
+      sx={{ marginBottom: "10px" }}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      size="small"
+    />
   );
 };
 

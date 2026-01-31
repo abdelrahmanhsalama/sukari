@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+
 type EntryButtonTypes = {
   value: string;
   onSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -5,13 +7,9 @@ type EntryButtonTypes = {
 
 const EntryButton = ({ onSubmit, value }: EntryButtonTypes) => {
   return (
-    <button
-      className="bg-black text-white p-2 rounded text-sm cursor-pointer disabled:bg-gray-200"
-      onClick={onSubmit}
-      disabled={!value.trim()}
-    >
+    <Button variant="contained" disabled={!value.trim()} onClick={onSubmit}>
       Submit
-    </button>
+    </Button>
   );
 };
 

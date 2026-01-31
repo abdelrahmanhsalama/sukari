@@ -1,36 +1,39 @@
 import { useState } from "react";
 import FormInsulin from "./FormInsulin";
 import FormOralMedication from "./FormOralMedication";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 const FormMedication = () => {
   const [activeTab, setActiveTab] = useState("insulin");
 
   return (
     <div className="w-full space-y-2 flex flex-col items-center">
-      <div className="w-[20ch]">
-        <h2 className="text-center">Add Insulin/Medication Dose</h2>
-        <div>
-          <label className="flex items-center gap-1 text-sm">
-            <input
-              type="radio"
-              name="selected-form"
-              checked={activeTab === "insulin"}
-              onChange={() => setActiveTab("insulin")}
-            ></input>
-            <span>Insulin</span>
-          </label>
-          <label className="flex items-center gap-1 text-sm">
-            <input
-              type="radio"
-              name="selected-form"
-              checked={activeTab === "oral-medication"}
-              onChange={() => setActiveTab("oral-medication")}
-            ></input>
-            <span>Oral Medication</span>
-          </label>
-        </div>
+      <div>
+        <h2 className="text-center mb-2">Add Insulin/Medication Dose</h2>
+        <RadioGroup value={activeTab} name="active-tab">
+          <FormControlLabel
+            value=""
+            control={<Radio sx={{ padding: 0 }} />}
+            label="Insulin"
+            sx={{
+              margin: 0,
+            }}
+            checked={activeTab === "insulin"}
+            onChange={() => setActiveTab("insulin")}
+          />
+          <FormControlLabel
+            value=""
+            control={<Radio sx={{ padding: 0 }} />}
+            label="Oral Medication"
+            sx={{
+              margin: 0,
+            }}
+            checked={activeTab === "oral-medication"}
+            onChange={() => setActiveTab("oral-medication")}
+          />
+        </RadioGroup>
       </div>
-      <div className="flex-1 flex justify-center items-center w-full">
+      <div className="flex-1 flex justify-center items-center w-full mt-2">
         {activeTab === "insulin" ? <FormInsulin /> : <FormOralMedication />}
       </div>
     </div>

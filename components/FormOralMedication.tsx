@@ -24,7 +24,7 @@ const FormOralMedication = () => {
   } = useFormManager();
 
   const [medicationValue, setMedicationValue] = useState<string>("");
-  const [medicationType, setMedicationType] = useState<string>("none");
+  const [medicationType, setMedicationType] = useState<string>("");
 
   const handleSubmit = () => {
     if (valueInvalid(medicationValue)) {

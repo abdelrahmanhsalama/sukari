@@ -1,3 +1,5 @@
+import { TextField } from "@mui/material";
+
 type EntryTimeTypes = {
   value: string;
   setValue: (arg0: string) => void;
@@ -5,11 +7,14 @@ type EntryTimeTypes = {
 
 const EntryTime = ({ value, setValue }: EntryTimeTypes) => {
   return (
-    <input
+    <TextField
+      fullWidth
       type="datetime-local"
-      className="border rounded w-full p-2 text-sm"
       value={value}
+      variant="outlined"
+      sx={{ marginBottom: "10px" }}
       onChange={(e) => setValue(e.target.value)}
+      size="small"
     />
   );
 };

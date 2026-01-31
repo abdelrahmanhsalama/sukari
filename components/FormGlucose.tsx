@@ -24,7 +24,7 @@ const FormGlucose = () => {
   } = useFormManager();
 
   const [glucoseValue, setGlucoseValue] = useState<string>("");
-  const [glucoseFlag, setGlucoseFlag] = useState<string>("none");
+  const [glucoseFlag, setGlucoseFlag] = useState<string>("");
 
   const handleSubmit = () => {
     if (valueInvalid(glucoseValue)) {
