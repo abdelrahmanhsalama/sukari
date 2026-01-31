@@ -14,7 +14,6 @@ const EntryTime = ({ value, setValue }: EntryTimeTypes) => {
       variant="outlined"
       sx={{ marginBottom: "10px" }}
       onChange={(e) => setValue(e.target.value)}
-      size="small"
     />
   );
 };

@@ -12,8 +12,15 @@ const FormMedication = () => {
         <h2 className="text-center mb-2">Add Insulin/Medication Dose</h2>
         <RadioGroup value={activeTab} name="active-tab">
           <FormControlLabel
-            value=""
-            control={<Radio sx={{ padding: 0 }} />}
+            control={
+              <Radio
+                sx={{
+                  padding: 0,
+                  paddingRight: "4px",
+                  marginBottom: "4px",
+                }}
+              />
+            }
             label="Insulin"
             sx={{
               margin: 0,
@@ -22,8 +29,7 @@ const FormMedication = () => {
             onChange={() => setActiveTab("insulin")}
           />
           <FormControlLabel
-            value=""
-            control={<Radio sx={{ padding: 0 }} />}
+            control={<Radio sx={{ padding: 0, paddingRight: "4px" }} />}
             label="Oral Medication"
             sx={{
               margin: 0,

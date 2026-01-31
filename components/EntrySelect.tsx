@@ -23,7 +23,6 @@ const EntrySelect = ({ value, setValue, type, options }: EntrySelectTypes) => {
             : "Select Medication Type"}
       </InputLabel>
       <Select
-        size="small"
         value={value}
         label={
           type === "glucose"

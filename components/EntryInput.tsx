@@ -27,7 +27,6 @@ const EntryInput = ({
       sx={{ marginBottom: "10px" }}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      size="small"
     />
   );
 };
