@@ -1,7 +1,7 @@
 import Card from "./Card";
 import ParentCard from "./ParentCard";
 
-const PageLog = () => {
+const PageSettings = () => {
   return (
     <ParentCard>
       <Card>...</Card>
@@ -9,4 +9,4 @@ const PageLog = () => {
   );
 };
 
-export default PageLog;
+export default PageSettings;

@@ -1,15 +1,13 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { useState } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { SquareActivity } from "lucide-react";
+import { AddCircleOutlined, History, Settings } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 const roboto = Roboto({ variable: "--font-roboto", subsets: ["latin"] });
 
@@ -19,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [bNValue, setBNValue] = useState(0);
+  const router = useRouter();
+
   return (
     <html lang="en">
       <head>
         <link rel="icon" href="https://fav.farm/%E2%9D%A4%EF%B8%8F" />
       </head>
-      <body
-        className={`${roboto.variable} antialiased *:text-foreground *:border-foreground`}
-      >
+      <body className={`${roboto.variable} antialiased`}>
         <div className="bg-foreground h-dvh flex justify-center items-center font-sans">
           <div className="h-full w-full sm:w-[360px] sm:h-[640px] sm:rounded-2xl flex flex-col justify-center items-center bg-blue-200 relative">
             <div className="flex-1 w-full p-4 flex flex-col justify-center items-center space-y-4">
@@ -44,16 +42,19 @@ export default function RootLayout({
                 }}
               >
                 <BottomNavigationAction
-                  label="Recents"
-                  icon={<RestoreIcon />}
+                  label="Add"
+                  icon={<AddCircleOutlined />}
+                  onClick={() => router.push("/")}
                 />
                 <BottomNavigationAction
-                  label="Favorites"
-                  icon={<FavoriteIcon />}
+                  label="Log"
+                  icon={<History />}
+                  onClick={() => router.push("/log")}
                 />
                 <BottomNavigationAction
-                  label="Nearby"
-                  icon={<LocationOnIcon />}
+                  label="Settings"
+                  icon={<Settings />}
+                  onClick={() => router.push("/settings")}
                 />
               </BottomNavigation>
             </div>
