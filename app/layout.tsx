@@ -2,12 +2,9 @@
 
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { useState } from "react";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { SquareActivity } from "lucide-react";
-import { AddCircleOutlined, History, Settings } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import NavBar from "@/components/NavBar";
 
 const roboto = Roboto({ variable: "--font-roboto", subsets: ["latin"] });
 
@@ -16,9 +13,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [bNValue, setBNValue] = useState(0);
-  const router = useRouter();
-
   return (
     <html lang="en">
       <head>
@@ -33,31 +27,7 @@ export default function RootLayout({
               </h1>
               {children}
             </div>
-            <div className="w-full">
-              <BottomNavigation
-                showLabels
-                value={bNValue}
-                onChange={(event, newValue) => {
-                  setBNValue(newValue);
-                }}
-              >
-                <BottomNavigationAction
-                  label="Add"
-                  icon={<AddCircleOutlined />}
-                  onClick={() => router.push("/")}
-                />
-                <BottomNavigationAction
-                  label="Log"
-                  icon={<History />}
-                  onClick={() => router.push("/log")}
-                />
-                <BottomNavigationAction
-                  label="Settings"
-                  icon={<Settings />}
-                  onClick={() => router.push("/settings")}
-                />
-              </BottomNavigation>
-            </div>
+            <NavBar />
           </div>
         </div>
       </body>
