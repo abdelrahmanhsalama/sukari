@@ -8,8 +8,8 @@ import EntryMessage from "./EntryMessage";
 import EntryButton from "./EntryButton";
 
 const options = [
+  { id: "i-00", label: "None Selected" },
   { id: "i-01", label: "🔵 Apidra" },
-  { id: "i-02", label: "🟣 Lantus" },
 ];
 
 const FormInsulin = () => {

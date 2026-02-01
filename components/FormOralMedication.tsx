@@ -7,10 +7,7 @@ import EntryMessage from "./EntryMessage";
 import EntryButton from "./EntryButton";
 import EntrySubCard from "./EntrySubCard";
 
-const options = [
-  { id: "m-01", label: "🔵 Medication 01" },
-  { id: "m-02", label: "🟣 Medication 02" },
-];
+const options = [{ id: "m-00", label: "None Selected" }];
 
 const FormOralMedication = () => {
   const {

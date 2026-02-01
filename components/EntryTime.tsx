@@ -12,7 +12,7 @@ const EntryTime = ({ value, setValue }: EntryTimeTypes) => {
       type="datetime-local"
       value={value}
       variant="outlined"
-      sx={{ marginBottom: "10px" }}
+      sx={{ marginBottom: "16px" }}
       onChange={(e) => setValue(e.target.value)}
     />
   );

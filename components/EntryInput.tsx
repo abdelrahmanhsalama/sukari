@@ -24,7 +24,7 @@ const EntryInput = ({
             : "Pills"
       }
       variant="outlined"
-      sx={{ marginBottom: "10px" }}
+      sx={{ marginBottom: "8px" }}
       value={value}
       onChange={(e) => setValue(e.target.value)}
     />

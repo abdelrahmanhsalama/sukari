@@ -6,8 +6,10 @@ import EntrySelect from "./EntrySelect";
 import EntryTime from "./EntryTime";
 import EntryMessage from "./EntryMessage";
 import EntryButton from "./EntryButton";
+import EntryCard from "./EntryCard";
 
 const options = [
+  { id: "f-00", label: "None Selected" },
   { id: "f-01", label: "💪🏻 Before Workout" },
   { id: "f-02", label: "💦 After Workout" },
 ];
@@ -41,8 +43,7 @@ const FormGlucose = () => {
   };
 
   return (
-    <div className="w-full space-y-2 flex flex-col items-center">
-      <h2>Add Glucose Reading</h2>
+    <EntryCard title="Add Glucose Reading">
       <EntrySubCard>
         <EntryInput
           value={glucoseValue}
@@ -63,7 +64,7 @@ const FormGlucose = () => {
         {errorMessage && <EntryMessage message={errorMessage} type="error" />}
         <EntryButton onSubmit={handleSubmit} value={glucoseValue} />
       </EntrySubCard>
-    </div>
+    </EntryCard>
   );
 };
 
